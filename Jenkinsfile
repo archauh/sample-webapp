@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Notify Build Start') {
+            steps {
+                echo "Build Started for Sample WebApp 🚀"
+            }
+        }
+
         stage('Clone Code') {
             steps {
                 git url: 'https://github.com/archauh/sample-webapp.git', branch: 'main'
@@ -50,7 +57,7 @@ pipeline {
     post {
         always {
             junit '**/target/surefire-reports/*.xml'
+            echo "Build Finished ✅"
         }
     }
 }
-
